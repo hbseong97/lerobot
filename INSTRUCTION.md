@@ -31,21 +31,29 @@
 
 # Commands
 
+conda activate lerobot
+
 sudo usermod -a -G dialout $USER # for accessing /dev/tty USB ports
+
+sudo bash -c 'cat >/etc/udev/rules.d/99-serial-stable.rules <<EOF
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d3", ATTRS{serial}=="5AAF218212", SYMLINK+="leader"
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="55d3", ATTRS{serial}=="5AB9065682", SYMLINK+="follower"
+EOF'
+
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+
 
 lerobot-calibrate \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/follower \
     --robot.id=my_awesome_follower_arm
 
 lerobot-calibrate \
     --teleop.type=so101_leader \
-    --teleop.port=/dev/ttyACM1 \
+    --teleop.port=/dev/leader \
     --teleop.id=my_awesome_leader_arm
 
-
-
-lerobot-teleoperate --robot.type=so101_follower  --robot.port=/dev/ttyACM0     --robot.id=my_awesome_follower_arm     --teleop.type=so101_leader     --teleop.port=/dev/ttyACM1     --teleop.id=my_awesome_leader_arm
 
 
 lerobot-find-cameras opencv 
@@ -53,11 +61,11 @@ lerobot-find-cameras opencv
 
 lerobot-teleoperate \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/follower \
     --robot.id=my_awesome_follower_arm \
     --robot.cameras="{ top: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30 }, right: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30 }}" \
     --teleop.type=so101_leader \
-    --teleop.port=/dev/ttyACM1 \
+    --teleop.port=/dev/leader \
     --teleop.id=my_awesome_leader_arm \
     --display_data=true
 
@@ -65,11 +73,11 @@ lerobot-teleoperate \
 
 lerobot-record \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/follower \
     --robot.id=my_awesome_follower_arm \
     --robot.cameras="{ top: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30 }, right: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30 }}" \
     --teleop.type=so101_leader \
-    --teleop.port=/dev/ttyACM1 \
+    --teleop.port=/dev/leader \
     --teleop.id=my_awesome_leader_arm \
     --display_data=true \
     --dataset.repo_id=hbseong/record-pick-and-place-so101 \
@@ -82,11 +90,11 @@ lerobot-record \
 
 lerobot-record \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/follower \
     --robot.id=my_awesome_follower_arm \
     --robot.cameras="{ top: {type: opencv, index_or_path: 0, width: 640, height: 480, fps: 30 }, right: {type: opencv, index_or_path: 2, width: 640, height: 480, fps: 30 }}" \
     --teleop.type=so101_leader \
-    --teleop.port=/dev/ttyACM1 \
+    --teleop.port=/dev/leader \
     --teleop.id=my_awesome_leader_arm \
     --display_data=true \
     --dataset.repo_id=hbseong/record-pick-and-place-so101 \
@@ -100,7 +108,7 @@ lerobot-record \
 
 lerobot-replay \
     --robot.type=so101_follower \
-    --robot.port=/dev/ttyACM0 \
+    --robot.port=/dev/follower \
     --robot.id=my_awesome_follower_arm \
     --dataset.repo_id=hbseong/record-pick-and-place-so101 \
     --dataset.episode=0
