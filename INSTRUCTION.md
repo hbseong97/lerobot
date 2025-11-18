@@ -21,7 +21,8 @@
 데이터 확인은 https://huggingface.co/spaces/lerobot/visualize_dataset?path=%2Fhbseong%2Frecord-pick-and-place-so101 에서 영상을 시청하시면 됩니다. 한 번 태스크를 수행하실때마다 왼쪽 사이드바에서 episode가 추가됩니다.
 
 
-만약 데이터가 문제 있다면 시트에 작성해주세요.
+만약 데이터가 문제 있다면 시트에 작성해주세요. https://docs.google.com/spreadsheets/d/1SxMKX5J-EzOnh3yuTEoGQuCKU3ACvCefPLT-UERwCiw/edit?gid=0#gid=0
+
 데이터가 문제 없다면 다시 1번으로 돌아가서 상자 위치 세팅부터 수행합니다.
 
 
