@@ -124,6 +124,7 @@ from lerobot.utils.utils import (
     get_safe_torch_device,
     init_logging,
     log_say,
+    say,
 )
 from lerobot.utils.visualization_utils import init_rerun, log_rerun_data
 
@@ -256,6 +257,7 @@ def record_loop(
     control_time_s: int | None = None,
     single_task: str | None = None,
     display_data: bool = False,
+    play_sounds: bool = True,
 ):
     if dataset is not None and dataset.fps != fps:
         raise ValueError(f"The dataset fps should be equal to requested fps ({dataset.fps} != {fps}).")
@@ -288,12 +290,21 @@ def record_loop(
 
     timestamp = 0
     start_episode_t = time.perf_counter()
+    last_logged_second = -1
     while timestamp < control_time_s:
         start_loop_t = time.perf_counter()
 
         if events["exit_early"]:
             events["exit_early"] = False
             break
+
+        # Log countdown every second
+        remaining_time = int(control_time_s - timestamp)
+        if remaining_time != last_logged_second and remaining_time > 0:
+            logging.info(f"Time remaining: {remaining_time}s")
+            if play_sounds:
+                say(str(remaining_time), blocking=False)
+            last_logged_second = remaining_time
 
         # Get robot observation
         obs = robot.get_observation()
@@ -464,6 +475,7 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
                 control_time_s=cfg.dataset.episode_time_s,
                 single_task=cfg.dataset.single_task,
                 display_data=cfg.display_data,
+                play_sounds=cfg.play_sounds,
             )
 
             # Execute a few seconds without recording to give time to manually reset the environment
@@ -483,6 +495,7 @@ def record(cfg: RecordConfig) -> LeRobotDataset:
                     control_time_s=cfg.dataset.reset_time_s,
                     single_task=cfg.dataset.single_task,
                     display_data=cfg.display_data,
+                    play_sounds=cfg.play_sounds,
                 )
 
             if events["rerecord_episode"]:
