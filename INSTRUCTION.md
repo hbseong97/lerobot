@@ -18,7 +18,7 @@
 
 ### 4. 데이터 검수 (영상 보기)
 
-데이터 확인은 https://huggingface.co/spaces/lerobot/visualize_dataset?path=%2Fhbseong%2Frecord-pick-and-place-so101 에서 영상을 시청하시면 됩니다. 한 번 태스크를 수행하실때마다 왼쪽 사이드바에서 episode가 추가됩니다.
+데이터 확인은 https://huggingface.co/spaces/lerobot/visualize_dataset?path=%2Fhbseong%2Frecord-pick-and-place-so101 에서 **새로고침을 누른 뒤**, 영상을 시청하시면 됩니다. 한 번 태스크를 수행하실때마다 왼쪽 사이드바에서 episode가 추가됩니다.
 
 ### 5. 데이터 시트 작성
 
@@ -86,7 +86,7 @@ lerobot-record \
     --dataset.episode_time_s=60 \
     --dataset.reset_time_s=60 \
     --dataset.num_episodes=1 \
-    --dataset.single_task="Pick the black cube, and place it in the pink box." 
+    --dataset.single_task="Pick the blue cube, and place it in the pink box." 
 
 
 
@@ -103,7 +103,7 @@ lerobot-record \
     --dataset.episode_time_s=60 \
     --dataset.reset_time_s=60 \
     --dataset.num_episodes=1 \
-    --dataset.single_task="Pick the black cube, and place it in the pink box." \
+    --dataset.single_task="Pick the blue cube, and place it in the pink box." \
     --resume=true
 
 
@@ -122,7 +122,7 @@ b() {
       --dataset.episode_time_s=60 \
       --dataset.reset_time_s=60 \
       --dataset.num_episodes=1 \
-      --dataset.single_task='Pick the black cube, and place it in the pink box.' \
+      --dataset.single_task='Pick the blue cube, and place it in the pink box.' \
       --resume=true \
       "$@"
 }
@@ -145,7 +145,7 @@ top camera : 12 cm right, 9cm front, 43cm up from desk edge center of follower a
 
 pink box : 22cm from desk edge center of follower arm
 
-4 designated locations of black cube
+4 designated locations of blue cube
 
 
 
