@@ -95,9 +95,10 @@ while recorded_episodes < NUM_EPISODES and not events["stop_recording"]:
         robot_observation_processor=robot_observation_processor,
     )
 
-    # Reset the environment if not stopping or re-recording
-    if not events["stop_recording"] and (
-        (recorded_episodes < NUM_EPISODES - 1) or events["rerecord_episode"]
+    # Reset the environment if not stopping and not re-recording
+    # Skip reset when rerecording since we want to immediately start the new recording
+    if not events["stop_recording"] and not events["rerecord_episode"] and (
+        recorded_episodes < NUM_EPISODES - 1
     ):
         log_say("Reset the environment")
         record_loop(

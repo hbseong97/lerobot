@@ -2,7 +2,7 @@
 
 ### 1. 상자 위치 세팅
 
-핑크색 상자는 고정입니다. 초록색 큐브의 위치는 지정된 4개 위치를 돌아가면서 설정해주시면 됩니다.
+핑크색 상자는 고정입니다. 검은색 큐브의 위치는 지정된 4개 위치를 돌아가면서 설정해주시면 됩니다.
 
 ### 2. 커맨드 입력
 
@@ -85,7 +85,7 @@ lerobot-record \
     --dataset.episode_time_s=60 \
     --dataset.reset_time_s=60 \
     --dataset.num_episodes=1 \
-    --dataset.single_task="Pick the green cube, and place it in the pink box." 
+    --dataset.single_task="Pick the black cube, and place it in the pink box." 
 
 
 
@@ -102,7 +102,7 @@ lerobot-record \
     --dataset.episode_time_s=60 \
     --dataset.reset_time_s=60 \
     --dataset.num_episodes=1 \
-    --dataset.single_task="Pick the green cube, and place it in the pink box." \
+    --dataset.single_task="Pick the black cube, and place it in the pink box." \
     --resume=true
 
 
@@ -121,7 +121,7 @@ b() {
       --dataset.episode_time_s=60 \
       --dataset.reset_time_s=60 \
       --dataset.num_episodes=1 \
-      --dataset.single_task='Pick the green cube, and place it in the pink box.' \
+      --dataset.single_task='Pick the black cube, and place it in the pink box.' \
       --resume=true \
       "$@"
 }
@@ -139,9 +139,13 @@ lerobot-replay \
 
 
 right camera : 45cm right, 27cm front from desk edge center of follower arm
+
 top camera : 12 cm right, 9cm front, 43cm up from desk edge center of follower arm
+
 pink box : 22cm from desk edge center of follower arm
-4 designated locations of green cube
+
+4 designated locations of black cube
+
 
 
 
